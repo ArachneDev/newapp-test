@@ -14,3 +14,4 @@ jobs:
       promote: true
       verify-window: "60"
       verify-failures: "2"
+      staging-url: https://api.github.com/zen
