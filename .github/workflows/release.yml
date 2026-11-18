@@ -1,0 +1,16 @@
+# Test fixture for app-pipeline ticket 44. Calls the branch under test.
+name: release
+on:
+  pull_request:
+  push: {branches: [main, staging], tags: ["v*.*.*"]}
+  workflow_dispatch:
+    inputs:
+      version: {description: "Earlier version to put back on :prod", required: true}
+jobs:
+  release:
+    permissions: {contents: read, packages: write}
+    uses: ArachneDev/app-pipeline/.github/workflows/build.yml@t44-prod-staging-tags
+    with:
+      promote: true
+      verify-window: "60"
+      verify-failures: "2"
